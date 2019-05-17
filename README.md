@@ -84,4 +84,4 @@ Default value:
 License
 =======
 
-MIT. See `LICENSE` for more details.
+BSD-2. See `LICENSE` for more details.
