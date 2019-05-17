@@ -1,0 +1,3 @@
+" call s:InitVariable('g:AlternateFindCmd', "rg --color never --files --no-messages -g '%e' %p")
+"let find_cmd = substitute(g:AlternateFindCmd, '%p', join(g:AlternatePaths, ' '), '')
+"let find_cmd = substitute(find_cmd, '%e', filename_without_extension . alternate_extension, '')
