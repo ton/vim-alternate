@@ -1,5 +1,5 @@
 Vim-alternate
--------------
+=============
 
 Vim-alternate allows to quickly switch between alternate files. A common use
 case for this plugin is to switch between C/C++ header and source files.
@@ -25,7 +25,7 @@ The latest version of vim-alternate can be found at:
 Bugs can be reported there as well.
 
 Usage
------
+=====
 
 Vim-alternate provides one command that opens the alternate file for the file
 loaded in the current buffer:
@@ -48,7 +48,7 @@ configuration.
 For more details and examples, see the OPTIONS section.
 
 Options
--------
+=======
 
 To set an option, include a line like the following in your Vim configuration:
 
@@ -59,7 +59,7 @@ let g:AlternatePaths = ['../itf', '../src', '.', '..']
 The remainder of this sections lists all available options:
 
 g:AlternatePaths
-================
+----------------
 
 Comma separated list of paths relative to the current file that are searched
 for the alternate file.
@@ -71,7 +71,7 @@ Default value:
 ```
 
 g:AlternateExtensionMappings
-============================
+----------------------------
 
 List of dictionaries mapping an extension to an alternate extension.
 
@@ -82,6 +82,6 @@ Default value:
 ```
 
 License
--------
+=======
 
 MIT. See `LICENSE` for more details.
