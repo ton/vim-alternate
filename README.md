@@ -45,7 +45,7 @@ nmap <silent> <F4> :FindAlternate<CR>
 Vim-alternate will then search for an alternate file based on the current
 configuration.
 
-For more details and examples, see the OPTIONS section.
+For more details and examples, see the Options section.
 
 Options
 =======
