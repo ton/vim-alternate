@@ -1,6 +1,6 @@
 " alternate.vim
 "
-" MIT license applies, see LICENSE for licensing details.
+" BSD-2 license applies, see LICENSE for licensing details.
 if exists('g:loaded_alternate')
     finish
 endif
