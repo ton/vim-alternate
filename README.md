@@ -8,7 +8,7 @@ extension. In case the current buffer contains a file with an extension mapped
 for vim-alternate, it allows to switch to a file with that extension at a
 specific location using a single command or shortcut. The alternate file may be
 located in a different directory relative to the current file. The directories
-that are considered can be configured per extension.
+that are considered can be configured separately.
 
 This plugin is similar to the well-known a.vim, but simpler. Vim-alternate
 weighs in at less than sixty lines of pure Vim script, and that includes
