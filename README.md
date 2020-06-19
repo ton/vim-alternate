@@ -67,7 +67,7 @@ for the alternate file.
 Default value:
 
 ```Vim
-['../itf', '../src', '.', '..']
+['.', '../itf', '../include', '../src']
 ```
 
 g:AlternateExtensionMappings

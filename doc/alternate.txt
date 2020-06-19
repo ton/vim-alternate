@@ -81,7 +81,7 @@ The following is a list of all available options:
         Comma separated list of paths relative to the current file that are
         searched for the alternate file.
 
-        Default value is: ['../itf', '../src', '.', '..']
+        Default value is: ['.', '../itf', '../include', '../src']
 
                                                   *g:AlternateExtensionMappings*
 
