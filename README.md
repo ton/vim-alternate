@@ -31,15 +31,15 @@ Vim-alternate provides one command that opens the alternate file for the file
 loaded in the current buffer:
 
 ```Vim
-:FindAlternate
+:Alternate
 ```
 
 No default keymappings are provided, but can easily be defined by the user. For
-example, to map F4 to :FindAlternate, add the following lines to your Vim
+example, to map F4 to :Alternate, add the following lines to your Vim
 configuration:
 
 ```Vim
-nmap <silent> <F4> :FindAlternate<CR>
+nmap <silent> <F4> :Alternate<CR>
 ```
 
 Vim-alternate will then search for an alternate file based on the current

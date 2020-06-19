@@ -6,7 +6,7 @@ if exists('g:loaded_alternate')
 endif
 let g:loaded_alternate = 1
 
-command! Alternate :call <SID>FindAlternate()
+command! Alternate :call <SID>Alternate()
 
 function! s:InitVariable(var, value)
     if !exists(a:var)
@@ -17,7 +17,7 @@ endfunction
 call s:InitVariable('g:AlternateExtensionMappings', [{'.cpp' : '.h', '.h' : '.hpp', '.hpp' : '.cpp'}, {'.c': '.h', '.h' : '.c'}])
 call s:InitVariable('g:AlternatePaths', ['.', '../itf', '../include', '../src'])
 
-function! s:FindAlternate()
+function! s:Alternate()
     let file_extension = '.' . expand("%:e")
 
     let is_alternate_defined = 0
