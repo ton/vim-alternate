@@ -18,7 +18,8 @@ call s:InitVariable('g:AlternateExtensionMappings', [{'.cpp' : '.h', '.h' : '.hp
 call s:InitVariable('g:AlternatePaths', ['.', '../itf', '../include', '../src'])
 
 function! s:Alternate()
-    let file_extension = '.' . expand("%:e")
+    " everything after the first dot
+    let file_extension = '.' . join(split(expand("%:t"), '\.')[1:], '.')
 
     let is_alternate_defined = 0
     for alternate_extension_mapping in g:AlternateExtensionMappings
@@ -28,7 +29,8 @@ function! s:Alternate()
         endif
 
         let file_path = expand("%:p:h")
-        let filename_without_extension = expand("%:t:r")
+        " everything before the first dot
+        let filename_without_extension = split(expand("%:t"), '\.')[0]
 
         let alternate_extension = alternate_extension_mapping[file_extension]
         while !empty(alternate_extension) && alternate_extension != file_extension
