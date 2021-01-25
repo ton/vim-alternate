@@ -11,7 +11,7 @@ located in a different directory relative to the current file. The directories
 that are considered can be configured separately.
 
 This plugin is similar to the well-known a.vim, but simpler. Vim-alternate
-weighs in at less than sixty lines of pure Vim script, and that includes
+weighs in at less than sixtytwo lines of pure Vim script, and that includes
 whitespace and comments. Furthermore, it simplifies dealing with a cycle of
 alternates. For example, with vim-alternate it is possible to switch from a C++
 source file (.cpp) to its corresponding header file (.h), then from the header
