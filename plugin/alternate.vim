@@ -18,22 +18,21 @@ call s:InitVariable('g:AlternateExtensionMappings', [{'.cpp' : '.h', '.h' : '.hp
 call s:InitVariable('g:AlternatePaths', ['.', '../itf', '../include', '../src'])
 
 function! s:Alternate()
-    " everything after the first dot
-    let file_extension = '.' . join(split(expand("%:t"), '\.')[1:], '.')
+    " Everything before and after the first dot respectively.
+    let path_parts = split(expand("%:t"), '\.')
+    let filename_without_extension = path_parts[0]
+    let extension = '.' . join(path_parts[1:], '.')
+    let file_path = expand("%:p:h")
 
     let is_alternate_defined = 0
     for alternate_extension_mapping in g:AlternateExtensionMappings
-        if !has_key(alternate_extension_mapping, file_extension)
+        if !has_key(alternate_extension_mapping, extension)
             let is_alternate_defined = 1
             continue
         endif
 
-        let file_path = expand("%:p:h")
-        " everything before the first dot
-        let filename_without_extension = split(expand("%:t"), '\.')[0]
-
-        let alternate_extension = alternate_extension_mapping[file_extension]
-        while !empty(alternate_extension) && alternate_extension != file_extension
+        let alternate_extension = alternate_extension_mapping[extension]
+        while !empty(alternate_extension) && alternate_extension != extension
             for alternate_path in g:AlternatePaths
                 let alternate_file_path = file_path . '/' . alternate_path . '/' . filename_without_extension . alternate_extension
                 if filereadable(alternate_file_path)
@@ -48,7 +47,7 @@ function! s:Alternate()
     endfor
 
     if !is_alternate_defined
-        call s:AlternateWarning('no alternate extension configured for extension ' . file_extension)
+        call s:AlternateWarning('no alternate extension configured for extension ' . extension)
     else
         call s:AlternateWarning('no alternate file found')
     endif
