@@ -39,7 +39,7 @@ function! s:Alternate()
                         return
                     endif
                 endfor
-                let alternate_extension = alternate_extension_mapping[alternate_extension]
+                let alternate_extension = get(alternate_extension_mapping, alternate_extension, extension)
             endwhile
         endif
     endfor
