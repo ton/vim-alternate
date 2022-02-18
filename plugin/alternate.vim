@@ -26,24 +26,22 @@ function! s:Alternate()
 
     let is_alternate_defined = 0
     for alternate_extension_mapping in g:AlternateExtensionMappings
-        if !has_key(alternate_extension_mapping, extension)
+        if has_key(alternate_extension_mapping, extension)
             let is_alternate_defined = 1
-            continue
+            let alternate_extension = alternate_extension_mapping[extension]
+            while !empty(alternate_extension) && alternate_extension != extension
+                for alternate_path in g:AlternatePaths
+                    let alternate_file_path = file_path . '/' . alternate_path . '/' . filename_without_extension . alternate_extension
+                    if filereadable(alternate_file_path)
+                        " Switch to the alternate file, modify the file path to be as
+                        " short as possible, without any dot dot entries.
+                        exe 'e ' . fnamemodify(alternate_file_path, ":p:.")
+                        return
+                    endif
+                endfor
+                let alternate_extension = alternate_extension_mapping[alternate_extension]
+            endwhile
         endif
-
-        let alternate_extension = alternate_extension_mapping[extension]
-        while !empty(alternate_extension) && alternate_extension != extension
-            for alternate_path in g:AlternatePaths
-                let alternate_file_path = file_path . '/' . alternate_path . '/' . filename_without_extension . alternate_extension
-                if filereadable(alternate_file_path)
-                    " Switch to the alternate file, modify the file path to be as
-                    " short as possible, without any dot dot entries.
-                    exe 'e ' . fnamemodify(alternate_file_path, ":p:.")
-                    return
-                endif
-            endfor
-            let alternate_extension = alternate_extension_mapping[alternate_extension]
-        endwhile
     endfor
 
     if !is_alternate_defined
