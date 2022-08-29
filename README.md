@@ -18,6 +18,14 @@ source file (.cpp) to its corresponding header file (.h), then from the header
 file to the corresponding header source file (.hpp) and finally back again to
 the C++ source file. Something a.vim does not support as far as I know.
 
+Extensions containing multiple dots are supported, and will be matched against
+all file names that end with that extension. This implies that there is room
+for amibiguity. Multiple extension mappings may match the extension or part of
+the extension of some filename. Vim-alternate will always favor the extension
+mapping that has the longest match with the extension of the current file name.
+In case multiple mappings have defined the same longest matching extension, the
+first mapping in the list of extension mappings is chosen.
+
 The latest version of vim-alternate can be found at:
 
   https://github.com/ton/vim-alternate
@@ -45,7 +53,8 @@ nmap <silent> <F4> :Alternate<CR>
 Vim-alternate will then search for an alternate file based on the current
 configuration.
 
-For more details and examples, see the Example and Options sections.
+For more details and examples, see the [Example](#Example) and
+[Options](#Options) sections.
 
 Example
 =======
@@ -59,14 +68,6 @@ Suppose vim-alternate is configured with the following alternate extension map:
 Using this alternate extension map, requesting the alternate file of `foo.cpp`
 will trigger the plugin to search for the file `foo.h` in the alternate
 directories, and in case that is not found, it will search for `foo.hpp`.
-
-Extensions containing multiple dots are supported, and will be matched against
-all file names that end with that extension. This implies that there is room
-for amibiguity. Multiple extension mappings may match the extension or part of
-the extension of some filename. Vim-alternate will always favor the extension
-mapping that has the longest match with the extension of the current file name.
-In case multiple mappings have defined the same longest matching extension, the
-first mapping in the list of extension mappings is chosen.
 
 Options
 =======
