@@ -22,28 +22,28 @@ function! s:Alternate()
     let file_path = expand("%:p:h")
     let is_alternate_defined = 0
     let alternate_file_path = v:null
-    let best_alternate_extension_length = 0
+    let longest_extension_length = 0
 
     for alternate_extension_mapping in g:AlternateExtensionMappings
         for extension in keys(alternate_extension_mapping)
             let extension_length = len(extension)
-            if filename[-extension_length:] == extension
-                let filename_without_extension = filename[:-1 - extension_length]
-                let is_alternate_defined = 1
-                let alternate_extension = alternate_extension_mapping[extension]
-                while !empty(alternate_extension) && alternate_extension != extension
-                    let alternate_extension_length = len(alternate_extension)
-                    if best_alternate_extension_length < alternate_extension_length
+            if longest_extension_length < extension_length
+                if filename[-extension_length:] == extension
+                    let filename_without_extension = filename[:-1 - extension_length]
+                    let is_alternate_defined = 1
+                    let alternate_extension = alternate_extension_mapping[extension]
+                    while !empty(alternate_extension) && alternate_extension != extension
+                        let alternate_extension_length = len(alternate_extension)
                         for alternate_path in g:AlternatePaths
                             let candidate_alternate_file_path = file_path . '/' . alternate_path . '/' . filename_without_extension . alternate_extension
                             if filereadable(candidate_alternate_file_path)
                                 let alternate_file_path = candidate_alternate_file_path
-                                let best_alternate_extension_length = alternate_extension_length
+                                let longest_extension_length = extension_length
                             endif
                         endfor
-                    endif
-                    let alternate_extension = get(alternate_extension_mapping, alternate_extension, extension)
-                endwhile
+                        let alternate_extension = get(alternate_extension_mapping, alternate_extension, extension)
+                    endwhile
+                endif
             endif
         endfor
     endfor
