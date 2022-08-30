@@ -8,12 +8,8 @@ let g:loaded_alternate = 1
 
 command! Alternate :call <SID>Alternate()
 
-if !exists(g:AlternateExtensionMappings)
-    let g:AlternateExtensionMappings = [{'.cpp' : '.h', '.h' : '.hpp', '.hpp' : '.cpp'}, {'.c': '.h', '.h' : '.c'}]
-endif
-if !exists(g:AlternatePaths)
-    let g:AlternatePaths = ['.', '../itf', '../include', '../src']
-endif
+let g:AlternateExtensionMappings = get(g:, 'AlternateExtensionMappings', [{'.cpp' : '.h', '.h' : '.hpp', '.hpp' : '.cpp'}, {'.c': '.h', '.h' : '.c'}])
+let g:AlternatePaths = get(g:, 'AlternatePaths', ['.', '../itf', '../include', '../src'])
 
 function! s:Alternate()
     let filename = expand("%:t")
