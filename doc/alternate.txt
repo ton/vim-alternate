@@ -91,6 +91,13 @@ The following is a list of all available options:
 
         Default value: [{'.cpp' : '.h', '.h' : '.hpp', '.hpp' : '.cpp'}, \
                         {'.c': '.h', '.h': '.c'}]
+                                                              *g:AlternateInTab*
+
+    |g:AlternateInTab|                          Open Alternate file in a new tab
+
+        Open the alternate file in a new tab.
+
+        Default valus is: 0
 
 
 LICENSE                                                      *alternate-license*
