@@ -107,6 +107,18 @@ This implies that in case you have a file named `foo.cpp` open, and ask for the
 alternate file, the plugin will first search for `foo.h` in the alternate
 directories, and in case that is not found, it will search for `foo.hpp`.
 
+
+g:AlternateInTab
+----------------
+
+Set this to 1 to open alternate file in a new tab.
+
+Default value:
+
+```Vim
+0
+```
+
 License
 =======
 
