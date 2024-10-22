@@ -93,11 +93,11 @@ Default value: `v:false`
 g:AlternateCommand
 ------------------
 
-Command to use for opening the alternate file. By default, this uses 'e' to
+Command to use for opening the alternate file. By default, this uses `e` to
 open the alternate file in the current buffer. To open the alternate file in a
-new tab for example, use 'tabnew'.
+new tab for example, use `tabnew`.
 
-Default value: 'e'
+Default value: `e`
 
 g:AlternateExtensionMappings
 ----------------------------
