@@ -8,6 +8,7 @@ let g:loaded_alternate = 1
 
 command! Alternate :call <SID>Alternate()
 
+let g:AlternateAutoCreate = get(g:, 'AlternateAutoCreate', v:false)
 let g:AlternateCommand = get(g:, 'AlternateCommand', 'e')
 let g:AlternateExtensionMappings = get(g:, 'AlternateExtensionMappings', [{'.cpp' : '.h', '.h' : '.hpp', '.hpp' : '.cpp'}, {'.c': '.h', '.h' : '.c'}])
 let g:AlternatePaths = get(g:, 'AlternatePaths', ['.', '../itf', '../include', '../src'])
@@ -18,6 +19,7 @@ function! s:Alternate()
     let is_alternate_defined = 0
     let alternate_file_path = v:null
     let longest_extension_length = 0
+    let auto_create_file_path = v:null
 
     for alternate_extension_mapping in g:AlternateExtensionMappings
         for extension in keys(alternate_extension_mapping)
@@ -34,6 +36,8 @@ function! s:Alternate()
                             if filereadable(candidate_alternate_file_path)
                                 let alternate_file_path = candidate_alternate_file_path
                                 let longest_extension_length = extension_length
+                            elseif auto_create_file_path is v:null
+                                let auto_create_file_path = candidate_alternate_file_path
                             endif
                         endfor
                         let alternate_extension = get(alternate_extension_mapping, alternate_extension, extension)
@@ -42,6 +46,18 @@ function! s:Alternate()
             endif
         endfor
     endfor
+
+    " In case no alternate file was found, and `g:AlternateAutoCreate` is set,
+    " create the alternate file (and possibly the directory of the alternate
+    " file).
+    if g:AlternateAutoCreate && alternate_file_path is v:null && auto_create_file_path isnot v:null
+        let maybe_missing_directory = fnamemodify(auto_create_file_path, ':h:.')
+        if !isdirectory(maybe_missing_directory)
+            call mkdir(maybe_missing_directory, 'p')
+        endif
+        let alternate_file_path = fnamemodify(auto_create_file_path, ':p:.')
+        call system('touch ' . alternate_file_path)
+    endif
 
     if alternate_file_path isnot v:null
         " Switch to the alternate file, modify the file path to be as

@@ -73,6 +73,17 @@ To set an option, include a line like the following in your Vim configuration:
 
 The following is a list of all available options:
 
+                                                         *g:AlternateAutoCreate*
+
+    |g:AlternateAutoCreate|   switch to automatically create a missing alternates
+
+        In case this is set, automatically creates a missing alternate file.
+        An alternate file is considered missing in case all possible alternate
+        files are missing on disk. In that case, the first configured
+        alternate file is automatically created, including any missing
+        directories.
+
+        Default value: `v:false`
 
                                                             *g:AlternateCommand*
 

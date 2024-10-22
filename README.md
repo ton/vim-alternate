@@ -11,7 +11,7 @@ located in a different directory relative to the current file. The directories
 that are considered can be configured separately.
 
 This plugin is similar to the well-known a.vim, but simpler. Vim-alternate
-weighs in at less than seventy lines of pure Vim script, and that includes
+weighs in at less than eighty lines of pure Vim script, and that includes
 whitespace and comments. Furthermore, it simplifies dealing with a cycle of
 alternates. For example, with vim-alternate it is possible to switch from a C++
 source file (.cpp) to its corresponding header file (.h), then from the header
@@ -79,6 +79,16 @@ let g:AlternatePaths = ['../itf', '../src', '.', '..']
 ```
 
 The remainder of this sections lists all available options:
+
+g:AlternateAutoCreate
+---------------------
+
+In case this is set, automatically creates a missing alternate file. An
+alternate file is considered missing in case all possible alternate files are
+missing on disk. In that case, the first configured alternate file is
+automatically created, including any missing directories.
+
+Default value: `v:false`
 
 g:AlternateCommand
 ------------------
