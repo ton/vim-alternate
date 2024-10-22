@@ -74,14 +74,15 @@ To set an option, include a line like the following in your Vim configuration:
 The following is a list of all available options:
 
 
-                                                              *g:AlternatePaths*
+                                                            *g:AlternateCommand*
 
-    |g:AlternatePaths|                    comma separated list of alternate paths
+    |g:AlternateCommand|            command to use for opening the alternate file
 
-        Comma separated list of paths relative to the current file that are
-        searched for the alternate file.
+        Command to use for opening the alternate file. By default, this uses
+        'e' to open the alternate file in the current buffer. To open the
+        alternate file in a new tab for example, use 'tabnew'.
 
-        Default value is: ['.', '../itf', '../include', '../src']
+        Default value: 'e'
 
                                                   *g:AlternateExtensionMappings*
 
@@ -91,6 +92,15 @@ The following is a list of all available options:
 
         Default value: [{'.cpp' : '.h', '.h' : '.hpp', '.hpp' : '.cpp'}, \
                         {'.c': '.h', '.h': '.c'}]
+
+                                                              *g:AlternatePaths*
+
+    |g:AlternatePaths|                    comma separated list of alternate paths
+
+        Comma separated list of paths relative to the current file that are
+        searched for the alternate file.
+
+        Default value: ['.', '../itf', '../include', '../src']
 
 
 LICENSE                                                      *alternate-license*

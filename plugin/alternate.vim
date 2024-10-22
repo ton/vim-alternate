@@ -8,6 +8,7 @@ let g:loaded_alternate = 1
 
 command! Alternate :call <SID>Alternate()
 
+let g:AlternateCommand = get(g:, 'AlternateCommand', 'e')
 let g:AlternateExtensionMappings = get(g:, 'AlternateExtensionMappings', [{'.cpp' : '.h', '.h' : '.hpp', '.hpp' : '.cpp'}, {'.c': '.h', '.h' : '.c'}])
 let g:AlternatePaths = get(g:, 'AlternatePaths', ['.', '../itf', '../include', '../src'])
 
@@ -45,7 +46,7 @@ function! s:Alternate()
     if alternate_file_path isnot v:null
         " Switch to the alternate file, modify the file path to be as
         " short as possible, without any dot dot entries.
-        exe 'e ' . fnamemodify(alternate_file_path, ":p:.")
+        exe g:AlternateCommand . ' ' . fnamemodify(alternate_file_path, ":p:.")
     elseif !is_alternate_defined
         call s:AlternateWarning('no alternate extension configured for ' . filename[max([stridx(filename, "."), 0]):])
     else
