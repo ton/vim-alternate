@@ -80,17 +80,14 @@ let g:AlternatePaths = ['../itf', '../src', '.', '..']
 
 The remainder of this sections lists all available options:
 
-g:AlternatePaths
-----------------
+g:AlternateCommand
+------------------
 
-Comma separated list of paths relative to the current file that are searched
-for the alternate file.
+Command to use for opening the alternate file. By default, this uses 'e' to
+open the alternate file in the current buffer. To open the alternate file in a
+new tab for example, use 'tabnew'.
 
-Default value:
-
-```Vim
-['.', '../itf', '../include', '../src']
-```
+Default value: 'e'
 
 g:AlternateExtensionMappings
 ----------------------------
@@ -106,6 +103,18 @@ Default value:
 This implies that in case you have a file named `foo.cpp` open, and ask for the
 alternate file, the plugin will first search for `foo.h` in the alternate
 directories, and in case that is not found, it will search for `foo.hpp`.
+
+g:AlternatePaths
+----------------
+
+Comma separated list of paths relative to the current file that are searched
+for the alternate file.
+
+Default value:
+
+```Vim
+['.', '../itf', '../include', '../src']
+```
 
 License
 =======
