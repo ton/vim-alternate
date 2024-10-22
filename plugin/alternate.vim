@@ -14,33 +14,33 @@ let g:AlternateExtensionMappings = get(g:, 'AlternateExtensionMappings', [{'.cpp
 let g:AlternatePaths = get(g:, 'AlternatePaths', ['.', '../itf', '../include', '../src'])
 
 function! s:Alternate()
-    let filename = expand("%:t")
-    let file_path = expand("%:p:h")
-    let is_alternate_defined = 0
-    let alternate_file_path = v:null
-    let longest_extension_length = 0
-    let auto_create_file_path = v:null
+    let l:filename = expand("%:t")
+    let l:file_path = expand("%:p:h")
+    let l:is_alternate_defined = 0
+    let l:alternate_file_path = v:null
+    let l:longest_extension_length = 0
+    let l:auto_create_file_path = v:null
 
-    for alternate_extension_mapping in g:AlternateExtensionMappings
-        for extension in keys(alternate_extension_mapping)
-            let extension_length = len(extension)
-            if longest_extension_length < extension_length
-                if filename[-extension_length:] == extension
-                    let filename_without_extension = filename[:-1 - extension_length]
-                    let is_alternate_defined = 1
-                    let alternate_extension = alternate_extension_mapping[extension]
-                    while !empty(alternate_extension) && alternate_extension != extension
-                        let alternate_extension_length = len(alternate_extension)
-                        for alternate_path in g:AlternatePaths
-                            let candidate_alternate_file_path = file_path . '/' . alternate_path . '/' . filename_without_extension . alternate_extension
-                            if filereadable(candidate_alternate_file_path)
-                                let alternate_file_path = candidate_alternate_file_path
-                                let longest_extension_length = extension_length
-                            elseif auto_create_file_path is v:null
-                                let auto_create_file_path = candidate_alternate_file_path
+    for l:alternate_extension_mapping in g:AlternateExtensionMappings
+        for l:extension in keys(l:alternate_extension_mapping)
+            let l:extension_length = len(l:extension)
+            if l:longest_extension_length < l:extension_length
+                if l:filename[-l:extension_length:] == l:extension
+                    let l:filename_without_extension = l:filename[:-1 - l:extension_length]
+                    let l:is_alternate_defined = 1
+                    let l:alternate_extension = l:alternate_extension_mapping[l:extension]
+                    while !empty(l:alternate_extension) && l:alternate_extension != l:extension
+                        let l:alternate_extension_length = len(l:alternate_extension)
+                        for l:alternate_path in g:AlternatePaths
+                            let l:candidate_alternate_file_path = l:file_path . '/' . l:alternate_path . '/' . l:filename_without_extension . l:alternate_extension
+                            if filereadable(l:candidate_alternate_file_path)
+                                let l:alternate_file_path = l:candidate_alternate_file_path
+                                let l:longest_extension_length = l:extension_length
+                            elseif l:auto_create_file_path is v:null
+                                let l:auto_create_file_path = l:candidate_alternate_file_path
                             endif
                         endfor
-                        let alternate_extension = get(alternate_extension_mapping, alternate_extension, extension)
+                        let l:alternate_extension = get(l:alternate_extension_mapping, l:alternate_extension, l:extension)
                     endwhile
                 endif
             endif
@@ -50,21 +50,21 @@ function! s:Alternate()
     " In case no alternate file was found, and `g:AlternateAutoCreate` is set,
     " create the alternate file (and possibly the directory of the alternate
     " file).
-    if g:AlternateAutoCreate && alternate_file_path is v:null && auto_create_file_path isnot v:null
-        let maybe_missing_directory = fnamemodify(auto_create_file_path, ':h:.')
-        if !isdirectory(maybe_missing_directory)
-            call mkdir(maybe_missing_directory, 'p')
+    if g:AlternateAutoCreate && l:alternate_file_path is v:null && l:auto_create_file_path isnot v:null
+        let l:maybe_missing_directory = fnamemodify(l:auto_create_file_path, ':h:.')
+        if !isdirectory(l:maybe_missing_directory)
+            call mkdir(l:maybe_missing_directory, 'p')
         endif
-        let alternate_file_path = fnamemodify(auto_create_file_path, ':p:.')
-        call system('touch ' . alternate_file_path)
+        let l:alternate_file_path = fnamemodify(l:auto_create_file_path, ':p:.')
+        call system('touch ' . l:alternate_file_path)
     endif
 
-    if alternate_file_path isnot v:null
+    if l:alternate_file_path isnot v:null
         " Switch to the alternate file, modify the file path to be as
         " short as possible, without any dot dot entries.
-        exe g:AlternateCommand . ' ' . fnamemodify(alternate_file_path, ":p:.")
+        exe g:AlternateCommand . ' ' . fnamemodify(l:alternate_file_path, ":p:.")
     elseif !is_alternate_defined
-        call s:AlternateWarning('no alternate extension configured for ' . filename[max([stridx(filename, "."), 0]):])
+        call s:AlternateWarning('no alternate extension configured for ' . l:filename[max([stridx(l:filename, "."), 0]):])
     else
         call s:AlternateWarning('no alternate file found')
     endif
